@@ -9,6 +9,7 @@ on:
     branches:
       - master
 
+
 jobs:
   building-and-testing:
     runs-on: ubuntu-latest
