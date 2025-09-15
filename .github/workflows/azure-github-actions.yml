@@ -1,7 +1,7 @@
 name: azure github actions
 
 env:
-  MAVEN_VERSION: 3.8.2
+  MAVEN_VERSION: 3.9.9
   JAVA_VERSION: 21
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
