@@ -21,9 +21,6 @@ jobs:
       - name: Maven Validate
         run: mvn validate
 
-      - name: Maven Compile
-        run: mvn compile
-
       - name: Maven Package
         run: mvn package
 
