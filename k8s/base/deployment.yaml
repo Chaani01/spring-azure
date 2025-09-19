@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: spring-azure
-          image: harshdeep09012004/spring-azure:v1.00
+          image: harshdeep09012004/spring-azure:v1.01
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
