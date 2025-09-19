@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-azure
+  namespace: spring
+  labels:
+    app: spring-azure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-azure
+  template:
+    metadata:
+      labels:
+        app: spring-azure
+    spec:
+      containers:
+        - name: spring-azure
+          image: harshdeep09012004/spring-azure:v1.00
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:+ExitOnOutOfMemoryError"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
