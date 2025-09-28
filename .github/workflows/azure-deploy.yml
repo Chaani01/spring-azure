@@ -27,8 +27,8 @@ jobs:
       - name: Set AKS context
         uses: azure/aks-set-context@v4
         with:
-          resource-group: rg-spring           # <-- your RG
-          cluster-name: aks-spring            # <-- your cluster
+          resource-group: Project01
+          cluster-name: Cluster0001
 
       - name: Kubectl apply (AKS overlay)
         run: |
