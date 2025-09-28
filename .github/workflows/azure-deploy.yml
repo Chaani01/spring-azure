@@ -1,0 +1,36 @@
+name: deploy to aks
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - "k8s/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Set AKS context
+        uses: azure/aks-set-context@v4
+        with:
+          resource-group: rg-spring           # <-- your RG
+          cluster-name: aks-spring            # <-- your cluster
+
+      - name: Kubectl apply (AKS overlay)
+        run: |
+          kubectl apply -k k8s/overlays/aks
+          kubectl rollout status deploy/spring-azure -n spring
