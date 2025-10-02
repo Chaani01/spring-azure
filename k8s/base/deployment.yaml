@@ -6,7 +6,7 @@ metadata:
   labels:
     app: spring-azure
 spec:
-  replicas: 1
+  replicas: 6
   selector:
     matchLabels:
       app: spring-azure
@@ -20,21 +20,21 @@ spec:
           image: harshdeep09012004/spring-azure:v1.01
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 6644
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-XX:+ExitOnOutOfMemoryError"
           readinessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 6644
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 6
           livenessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 6644
             initialDelaySeconds: 30
             periodSeconds: 20
           resources:

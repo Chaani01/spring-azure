@@ -11,5 +11,5 @@ spec:
     app: spring-azure
   ports:
     - name: http
-      port: 80
-      targetPort: 8080
+      port: 6644
+      targetPort: 6644
