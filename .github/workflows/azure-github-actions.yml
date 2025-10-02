@@ -76,5 +76,8 @@ jobs:
 
       - name: Kubectl apply (AKS overlay)
         run: |
-          kubectl apply -k k8s/overlays/aks
-          kubectl rollout status deploy/spring-azure -n spring
+          kubectl apply -f k8s/base/deployment.yaml -n spring
+          kubectl apply -f k8s/base/service.yaml -n spring
+          kubectl get all -n spring
+          kubectl get pods,svc -n spring
+
